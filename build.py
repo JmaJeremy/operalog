@@ -222,7 +222,7 @@ def page(rows):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jeremy's Opera Log</title>
-<meta name="description" content="Every opera I've attended, {first.year}–{last.year}.">
+<meta name="description" content="Every opera I've attended or will be attending soon, {first.year}–{last.year}.">
 <style>{CSS}</style>
 </head>
 <body>
