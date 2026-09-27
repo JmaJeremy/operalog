@@ -221,13 +221,13 @@ def page(rows):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Opera Log</title>
+<title>Jeremy's Opera Log</title>
 <meta name="description" content="Every opera I've attended, {first.year}–{last.year}.">
 <style>{CSS}</style>
 </head>
 <body>
 <main>
-<header><h1>Opera Log</h1><p>Every opera I've attended, {first.year}–{last.year}.</p></header>
+<header><h1>Jeremy's Opera Log</h1><p>Every opera I've attended, {first.year}–{last.year}.</p></header>
 <div class="stats">{stats(rows)}</div>
 <div class="grid">
 {bar_chart("Most-seen operas", operas)}
