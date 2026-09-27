@@ -5,6 +5,7 @@ No dependencies beyond the Python standard library. Run: python3 build.py
 """
 import csv
 import html
+import unicodedata
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
@@ -25,20 +26,66 @@ def parse_date(s):
     raise ValueError(f"Unrecognised date {s!r} (use YYYY-MM-DD)")
 
 
+WEEKDAYS = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"}
+# Columns checked for near-duplicate spellings, e.g. "La Boheme" vs "La Bohème".
+CHECKED = ("OperaName", "Composer", "OperaCompany", "Venue")
+
+
 def load():
     with open(DATA, encoding="utf-8-sig", newline="") as f:
+        reader = csv.reader(f)
+        header = [h.strip() for h in next(reader)]
         rows = []
-        for i, r in enumerate(csv.DictReader(f), start=2):
-            r = {k.strip(): (v or "").strip() for k, v in r.items() if k}
+        for fields in reader:
+            line = reader.line_num
+            fields = [v.strip() for v in fields]
+            # Rows pasted from the spreadsheet still have its DayOfWeek column
+            # after Date; drop it; the weekday is derived from the date.
+            if len(fields) > len(header) and len(fields) > 1 and fields[1].lower() in WEEKDAYS:
+                del fields[1]
+            r = dict(zip(header, fields))
             if not r.get("Date") or not r.get("OperaName"):
                 continue
             try:
                 r["date"] = parse_date(r["Date"])
             except ValueError as e:
-                raise SystemExit(f"{DATA.name} line {i}: {e}")
+                raise SystemExit(f"{DATA.name} line {line}: {e}")
+            r["line"] = line
             rows.append(r)
     rows.sort(key=lambda r: (r["date"], r.get("Time", "")), reverse=True)
     return rows
+
+
+def fold(s):
+    """Lower-case, strip accents and punctuation, collapse spaces."""
+    s = unicodedata.normalize("NFKD", s.casefold())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return " ".join("".join(c if c.isalnum() else " " for c in s).split())
+
+
+def warn_near_duplicates(rows):
+    """Warn when differently spelled values would fold to the same name.
+
+    They are counted separately in the charts, which is almost always a typo.
+    Printed as GitHub Actions annotations so they show on the workflow run.
+    """
+    found = 0
+    for col in CHECKED:
+        groups = {}
+        for r in rows:
+            if r.get(col):
+                groups.setdefault(fold(r[col]), {}).setdefault(r[col], []).append(r["line"])
+        for spellings in groups.values():
+            if len(spellings) < 2:
+                continue
+            found += 1
+            detail = "; ".join(
+                f'"{name}" (line{"s" if len(ls) > 1 else ""} {", ".join(map(str, sorted(ls)))})'
+                for name, ls in sorted(spellings.items())
+            )
+            line = min(min(ls) for ls in spellings.values())
+            print(f"::warning file=data/operas.csv,line={line}::{col} spelled differently: {detail}")
+    return found
 
 
 e = html.escape
@@ -91,7 +138,7 @@ def listing(rows):
             year = r["date"].year
             out.append(f'<h3 class="year">{year}</h3><ol class="log">')
         d = r["date"]
-        when = f'{r.get("DayOfWeek") or d.strftime("%A")}, {d.strftime("%-d %B %Y")}'
+        when = d.strftime("%A, %-d %B %Y")
         if r.get("Time"):
             when += f' · {r["Time"][:5]}'
         alt = f' <span class="alt">({e(r["AlternateTitle"])})</span>' if r.get("AlternateTitle") else ""
@@ -200,6 +247,7 @@ def main():
     rows = load()
     if not rows:
         raise SystemExit("No performances found in data/operas.csv")
+    warn_near_duplicates(rows)
     OUT.mkdir(exist_ok=True)
     (OUT / "index.html").write_text(page(rows), encoding="utf-8")
     print(f"Wrote {OUT / 'index.html'} ({len(rows)} performances)")
