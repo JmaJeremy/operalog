@@ -227,7 +227,7 @@ def page(rows):
 </head>
 <body>
 <main>
-<header><h1>Jeremy's Opera Log</h1><p>Every opera I've attended, {first.year}–{last.year}.</p></header>
+<header><h1>Jeremy's Opera Log</h1><p>Every opera I've attended or will be attending soon, {first.year}–{last.year}.</p></header>
 <div class="stats">{stats(rows)}</div>
 <div class="grid">
 {bar_chart("Most-seen operas", operas)}
