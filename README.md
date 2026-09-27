@@ -7,7 +7,10 @@ A list of every opera I've attended, with charts of my most-seen operas and comp
 1. Edit `data/operas.csv`. Add one row per performance; row order doesn't matter.
    - `Date` is written as `YYYY-MM-DD` (`DD/MM/YYYY` also works).
    - `Time` is written as `HH:MM`. Leave any column blank if you don't know it.
+   - The page works out the day of the week from the date. You can still paste rows straight from the spreadsheet: the build skips its extra `DayOfWeek` column.
 2. Commit and push to `main`. A GitHub Action rebuilds the page and deploys it.
+
+If the same opera, composer, company or venue is spelled two different ways (for example "La Boheme" and "La Bohème"), the build still runs. It shows a warning with the line numbers on the Action's run page, so you can fix the spelling and have them counted together.
 
 To preview on your own computer, run `python3 build.py` and open `_site/index.html`. You only need Python 3; there's nothing to install.
 
