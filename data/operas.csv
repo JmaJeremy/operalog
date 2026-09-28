@@ -1,11 +1,11 @@
-Date,Time,OperaName,AlternateTitle,Composer,Language,OperaCompany,Venue,Seats
+﻿Date,Time,OperaName,AlternateTitle,Composer,Language,OperaCompany,Venue,Seats
 2005-05-21,,Carmen,,Georges Bizet,French,Opéra de Montréal,Place des Arts,
 2014-03-22,,Hansel & Gretel,,Engelbert Humperdinck,German,Opéra de Montréal,Place des Arts,
 2015-05-15,19:30,La Traviata,,Giuseppe Verdi,Italian,Staatstheater Nürnberg,Opernhaus Nürnberg,
 2015-06-05,20:00,Salome,,Richard Strauss,German,Wiener Staatsoper,Wiener Staatsoper,
-2016-10-16,14:00,Ariodante,,George Frideric Handel,Italian,Canadian Opera Company,,H554
+2016-10-16,14:00,Ariodante,,George Frideric Handel,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,H554
 2016-10-26,19:30,Norma,,Vincenzo Bellini,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,H512
-2017-02-02,18:00,Götterdämmerung,,Richard Wagner,German,Canadian Opera Company,,G526
+2017-02-02,18:00,Götterdämmerung,,Richard Wagner,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,G526
 2017-02-10,19:30,The Magic Flute,Die Zauberflöte,Wolfgang Amadeus Mozart,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,C556
 2017-05-13,20:30,Cyrano de Bergerac,,Franco Alfano,French,Metropolitan Opera,Metropolitan Opera House,DRESS CIRCLE B26
 2017-10-05,19:30,Arabella,,Richard Strauss,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,G533-G534-G535
@@ -18,7 +18,7 @@ Date,Time,OperaName,AlternateTitle,Composer,Language,OperaCompany,Venue,Seats
 2019-05-09,19:30,Otello,,Giuseppe Verdi,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
 2019-10-09,19:30,Turandot,,Giacomo Puccini,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
 2019-10-16,19:30,Rusalka,,Antonín Dvořák,Czech,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
-2020-01-22,,The Barber of Seville,Il barbiere di Siviglia,Gioachino Rossini,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
+2020-01-22,19:30,The Barber of Seville,Il barbiere di Siviglia,Gioachino Rossini,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
 2020-02-21,19:30,Hansel & Gretel,,Engelbert Humperdinck,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,
 2022-05-01,14:00,La Traviata,,Giuseppe Verdi,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
 2022-05-08,14:00,The Magic Flute,Die Zauberflöte,Wolfgang Amadeus Mozart,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
@@ -53,4 +53,4 @@ Date,Time,OperaName,AlternateTitle,Composer,Language,OperaCompany,Venue,Seats
 2027-02-07,14:00,The Turn of the Screw,,Benjamin Britten,English,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
 2027-02-14,14:00,Ariadne auf Naxos,,Richard Strauss,German,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
 2027-05-09,14:00,Empire of Wild,,Ian Cusson,English,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
-2027-05-16,14:00,The Elixir of Love,L'elisir d’amore,Gaetano Donizetti,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
+2027-05-16,14:00,The Elixir of Love,L'elisir d'amore,Gaetano Donizetti,Italian,Canadian Opera Company,Four Seasons Centre for the Performing Arts,A516
