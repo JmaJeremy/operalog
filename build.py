@@ -5,6 +5,7 @@ No dependencies beyond the Python standard library. Run: python3 build.py
 """
 import csv
 import html
+import shutil
 import unicodedata
 from collections import Counter
 from datetime import date, datetime
@@ -13,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 DATA = ROOT / "data" / "operas.csv"
 OUT = ROOT / "_site"
+STATIC = ROOT / "static"  # copied as-is into the site, e.g. favicon.png
 TOP_N = 10
 
 
@@ -222,6 +224,7 @@ def page(rows):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jeremy's Opera Log</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <meta name="description" content="Every opera I've attended or will be attending soon, {first.year}–{last.year}.">
 <style>{CSS}</style>
 </head>
@@ -249,6 +252,8 @@ def main():
         raise SystemExit("No performances found in data/operas.csv")
     warn_near_duplicates(rows)
     OUT.mkdir(exist_ok=True)
+    if STATIC.is_dir():
+        shutil.copytree(STATIC, OUT, dirs_exist_ok=True)
     (OUT / "index.html").write_text(page(rows), encoding="utf-8")
     print(f"Wrote {OUT / 'index.html'} ({len(rows)} performances)")
 
